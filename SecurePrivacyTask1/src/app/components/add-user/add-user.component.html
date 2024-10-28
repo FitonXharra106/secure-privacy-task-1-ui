@@ -1,0 +1,49 @@
+<!-- User Addition Form -->
+<!-- This form allows the user to enter their information to add a new user. -->
+<form [formGroup]="addUserForm" (ngSubmit)="onSubmit()" class="form-container">
+  <h2>Add User</h2>
+
+  <!-- Input group for the user's first name -->
+  <div class="input-group">
+    <input formControlName="firstName" placeholder="First Name" />
+    <!-- Validation messages for the first name input -->
+    <div *ngIf="addUserForm.get('firstName')?.invalid && addUserForm.get('firstName')?.touched">
+      <small *ngIf="addUserForm.get('firstName')?.errors?.['required']">First name is required.</small>
+      <small *ngIf="addUserForm.get('firstName')?.errors?.['pattern']">First name must contain only letters.</small>
+    </div>
+  </div>
+
+  <!-- Input group for the user's last name -->
+  <div class="input-group">
+    <input formControlName="lastName" placeholder="Last Name" />
+    <!-- Validation messages for the last name input -->
+    <div *ngIf="addUserForm.get('lastName')?.invalid && addUserForm.get('lastName')?.touched">
+      <small *ngIf="addUserForm.get('lastName')?.errors?.['required']">Last name is required.</small>
+      <small *ngIf="addUserForm.get('lastName')?.errors?.['pattern']">Last name must contain only letters.</small>
+    </div>
+  </div>
+
+  <!-- Input group for the user's email address -->
+  <div class="input-group">
+    <input formControlName="email" placeholder="Email" type="email" />
+    <!-- Validation messages for the email input -->
+    <div *ngIf="addUserForm.get('email')?.invalid && addUserForm.get('email')?.touched">
+      <small *ngIf="addUserForm.get('email')?.errors?.['required']">Email is required.</small>
+      <small *ngIf="addUserForm.get('email')?.errors?.['email']">Enter a valid email address.</small>
+    </div>
+  </div>
+
+  <!-- Consent checkbox to ensure user agrees to terms -->
+  <div class="consent">
+    <label>
+      <input type="checkbox" formControlName="consentGiven" /> Consent Given
+    </label>
+    <!-- Validation message for consent -->
+    <div *ngIf="addUserForm.get('consentGiven')?.invalid && addUserForm.get('consentGiven')?.touched">
+      <small style="margin-left: 10px;">Consent is required to proceed.</small>
+    </div>
+  </div>
+
+  <!-- Submit button to add the user, disabled if the form is invalid -->
+  <button type="submit" class="submit-btn" [disabled]="addUserForm.invalid">Add User</button>
+</form>
